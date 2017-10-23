@@ -1,0 +1,111 @@
+\section{Introduction}
+
+Let $f : [-\pi,\pi] \to \R$ be a $2\pi$ periodic function, we may associate to it with a
+sequence \emph{Fourier coefficients} $\hat{f} : \Z \to \R$, defined by:
+\[
+  \hat{f}(n) \triangleq \frac{1}{2\pi} \int_{-\infty}^{\infty} f(\theta) e^{-in\theta} d\theta
+\]
+and approximate the original function by the \emph{Fourier series} of $f$:
+\[
+  f(\theta) \sim \sum_{-\infty}^{\infty} \hat{f}(n) e^{in\theta}
+\]
+If $f \in L^2(-\pi, \pi)$, by Theorem 8.43 in \cite{folland}, we can establish a
+correspondence between the series and $f$ by showing the series converges to $f$
+in norm (of the $L^2$ space), that is,
+\[
+  \lim_{N \to \infty} \int_{-\pi}^{\pi} \abs{f(\theta) - \sum_{-N}^{N} \hat{f}(n)
+    e^{in\theta}} = 0
+\]
+Moreover, since the integral of $e^{in\theta}$ from $\theta = -\pi$ to $\pi$ is zero
+except for $n = 0$, $\langle e^{in\theta}, e^{im\theta} \rangle = 0$ for all $m
+\neq n$. Hence $\{e^{in\theta}\}_{-\infty}^{\infty}$ forms an \emph{orthogonal
+  basis} for $L^2(-\pi,\pi)$.
+
+The first generalization one may make is to allow $f$ to be a (possibly)
+non periodic function from $\R$ to $\R$, and consider the ``continuous''
+analogue of Fourier coefficients.  This generalization defines us the
+\emph{Fourier transform} of $f$, $\mathcal{F}f = \hat{f} : \R \to \R$:
+\[
+  \hat{f}(\xi) \triangleq \frac{1}{2\pi} \int_{-\infty}^{\infty} f(\theta)
+  e^{-i\xi\theta} d\theta
+\]
+and the corresponding approximation for the original $f$:
+\begin{equation}
+  \label{eq:fourier-inversion}
+  f(\theta) \sim \int_{-\infty}^{\infty} \hat{f}(\xi) e^{i\xi\theta} d\xi
+\end{equation}
+If we restrict $f \in L^2(\R)$, then by Theorem 1.9 in Chapter 5 of
+\cite{stein2011fourier}, \cref{eq:fourier-inversion} turns out to be an
+equality, hence the name: \emph{Fourier inversion} formula. By the same argument
+as before, the set $\{e^{i\xi\theta}\}$ is an orthogonal basis of $L^2(\R)$.
+
+The second and the third possible generalization follows from the observation
+that the Fourier transform $\mathcal{F}(-)$ is a endomorphism on the group
+$L^2(\R)$ under convolution.  If we define an operator $T_t : L^2(\R) \to
+L^2(\R)$, $(T_tf)(\theta) \triangleq f(\theta + t)$ for every $t \in \R$, and
+define the group action $\pi : \R \times L^2(\R) \to L^2(\R)$ by $\pi(t)f =
+\mathcal{F}(T_tf)$. A simple calculation by substitution shows, for a given $t
+\in \R$,
+\[
+  \widehat{T_t f}(\xi)
+  = \frac{1}{2\pi} \int_{-\infty}^{\infty} f(\theta + t) e^{-i\xi\theta} d\theta
+  = \frac{1}{2\pi} \int_{-\infty}^{\infty} f(\theta) e^{-i\xi(\theta - t)} d\theta
+  = \hat{f}(\xi) \cdot e^{it\xi}
+\]
+Hence $(L^2(\R), \pi)$ is a representation of $\R$ in the inner product space
+$L^2(\R)$ (these terms will be defined more precisely in Section 3).
+
+If we replace $\R$ by a finite group $G$ and the inner product space $L^2(\R)$
+by a generic finite-dimensional vector space $V$, we obtain what's called
+\emph{discrete Fourier transform}.  Given this generalization, we are also
+interested in questions arose classic Fourier theory, that is, (1) whether it is
+possible to find a decomposition of elements in $V$ into linear combinations of
+a basis and (2) whether an orthogonal basis exist.
+
+The main portion of the paper will be devoted to investigate the same question
+for the case where $G$ is an non-abelian compact group and the vector space $V$
+is a Hilbert space.
+
+% And the third
+% generalization 
+
+
+% the
+% function space $L^2(\R)$ is a group representation of the group additive group
+% $\R$ with the Fourier transform $\mathcal{F}(-)$ being the group action.
+
+
+
+% The purpose of this paper is to discuss Peter-Weyl's Theorem, a classical result
+% in representation theory that generalizes the theory Fourier Transformation.  The
+% theorem and machineries all follows from the observation that $L^2(\T)$, the
+% space of square integrable functions on the circle group, serves as a group
+% representation of $\T$.
+
+% Peter-Weyl's Theorem, when instantiated with group $\T$, asserts the
+% representation $L^2(\T)$ may be decomposed into a direct sum of
+% finite-dimensional irreducible representations. Moreover, the matrix
+% coefficients of the irreducible unitary representations form an orthonormal
+% basis of $L^2(\T)$, namely $\{e^{2\pi i n x}\}_{n \in \mathbb{Z}}$.
+
+In Section 2, we will develop background machineries from measure theory and
+functional analysis that allow us to pull off the main result in Section 4.  In
+Section 3, we will investigate the second generalization of abstract Fourier
+analysis, namely discrete Fourier analysis, and in Section 4 we will establish
+the result of abstract Fourier analysis on compact groups.
+
+% We will start by introducing background definitions and developing results in
+% representation theory that allow us to discuss abstract ``Fourier Analysis'' as
+% group actions on arbitrary vector spaces.  In Section 2, we discuss such
+% representations on finite groups and we will extend those theories to
+% representations of c
+% ompact groups in Section 3.  Following that is a proof of
+% Peter-Weyl's Theorem in Section 4.  Finally, we will discuss a categorification of
+% the abstraction process we've gone through and show the equivalence between
+% category of representations of $G$ and category of vector spaces parametrized by
+% the dual group $\hat{G}$ of characters.
+
+% % At the end of the paper, we will also discuss a categorification of the result
+% % that establishes an equivalence between the category of representations of $G$
+% % and the category of 
+

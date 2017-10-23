@@ -1,0 +1,378 @@
+
+\section{Representation Theory for Finite Groups}
+
+\begin{defn}[Group action]
+  Let $G$ be a group, the action of $G$ on set $X$ is a map $\alpha : G \times X
+  \to X$ that is compatible with the group structure.  That means, for all $g,h
+  \in G$, $x \in X$,
+  \begin{align*}
+    \alpha(gh)x & = \alpha(g)(\alpha(h)x)\\
+    \alpha(1_G)x & = x
+  \end{align*}
+\end{defn}
+
+\begin{defn}[Linear Representation]
+  Let $G$ be a group, a \emph{linear representation} $\rho$ of $G$ on a complex
+  vector space $V$ is a group action on $V$ that preserves the vector space
+  structure of $V$.
+\end{defn}
+
+If the context is clear, we would simply refer to a representation $(\rho, V)$
+of group $G$ by the vector space $V$.  We will also write $gv$ in place for
+$\rho(g)(v)$ when the $G$-action $\rho$ is clear from the context.
+% Throughout
+% this paper, we will always be interested in complex representations, however,
+% the following Proposition is true generally:
+
+\begin{prop}
+  The set of representations of $G$ on $V$ is in bijection with the set of group
+  homomorphisms from $G$ to $GL(V)$.
+\end{prop}
+
+\begin{proof}
+  Let $(\rho, V)$ be a $G$-representation.  By definition of group action,
+  $\rho$ preserves group structure, in particular $\rho(g)$ is invertible for
+  every $g \in G$. Conversely, let $f \in Hom(G,GL(V))$ be given, then for every
+  $g \in G$, $f(g) \in GL(V)$, thus preserves $V$ structure.  Furthermore, since
+  $f$ is a homomorphism, it preserves $G$ structure, hence a $G$-representation.
+\end{proof}
+
+\begin{defn}[Isomorphic class of reps]
+  Let $G$ be a group, $(\rho_1, V_1)$ and $(\rho_2, V_2)$ be two representations
+  of $G$.  An \emph{isomorphism} between those two representations is a linear
+  isomorphism $\phi : V_1 \to V_2$ such that the following diagrams commutes for
+  every $g \in G$:
+  \[
+    \begin{tikzcd}
+      V_1 \arrow[d, "\phi", "\vsimeq"'] \arrow[r, "\rho_1(g)"] & V_1 \arrow[d, "\vsimeq"', "\phi"]\\
+      V_2 \arrow[r, "\rho_2(g)"] & V_2
+    \end{tikzcd}
+  \]
+  In this case, we asy $V_1$ and $V_2$ are \emph{equivalent representations}.
+
+  An \emph{isomorphic class of representations} of $G$ is thus defined to be a
+  equivalence class of representations that are equivalent to each other.
+
+
+  Generally, if $\phi$ is not an isomorphism, it's referred to as an
+  \emph{interwining operator} or a \emph{$G$-linear map}.  For notational
+  convenience, let $\Hom^G(V,W)$ denote the space of $G$-linear maps.
+\end{defn}
+
+\subsection{Representation Constructions}
+
+% In this subsection, we will define some basic constructions of representations
+% and introduce some canonical examples of representations.
+
+Since the definition $G$-representation relies on a linear structure, a number
+of constructions of representations are inherited from constructions on vector
+spaces.
+
+\begin{defn}[Direct sum of representations]
+  Let $(\rho_1, V_1)$ and $(\rho_2, V_2)$ be two representations of group $G$,
+  the \emph{direct sum} of two representations is the space $V_1 \oplus V_2$
+  equipped with action $\rho_1 \oplus \rho_2 = \alpha \circ (\rho_1 \times
+  \rho_2)$.  Where $\alpha : GL(V_1) \times GL(V_2) \to GL(V_1 \oplus V_2)$
+  is a map obtained by coordinate-wise action.
+
+  Notice the map $\rho_1 \oplus \rho_2$ may also be identified by the block
+  diagonal matrix:
+  \[
+    \rho_1 \oplus \rho_2 : g \mapsto
+    \begin{pmatrix}
+      \rho_1(g) & 0\\
+      0      & \rho_2(g)
+    \end{pmatrix}
+  \]
+\end{defn}
+
+\begin{defn}[Dual representation]
+  Let $(\rho, V)$ be a representation of group $G$, the \emph{dual
+    representation} is the dual space $V^* = \Hom(V,k)$ with action $\hat{\rho} : G
+  \times V^* \to V^*$:
+  \[
+    \hat{\rho}(g) : L \mapsto L \circ \rho(g)^{-1}
+  \]
+  we call $\hat{\rho}$ the \emph{contragradient} of $\rho$.  It's easy to check
+  \begin{align*}
+    \hat{\rho}(g_1g_2) & = (L \mapsto L \circ \rho((g_1g_2^{-1})))\\
+                       & = (L \mapsto L \circ \rho(g_2^{-1}g_1^{-1}))\\
+                       & = (L \mapsto L \circ \rho(g_2^{-1}) \circ \rho(g_1^{-1}))\\
+                       & = \hat{\rho}(g_1) \circ (L \mapsto L \circ \rho(g_2^{-1}))\\
+                       & = \hat{\rho}(g_1) \circ \hat{\rho}(g_2)
+  \end{align*}
+\end{defn}
+
+\begin{defn}[Subrepresentation]
+  Let $(\rho, V)$ be a representation of group $G$. A \emph{subrepresentation}
+  of $V$ is a $G$-invariant subspace $W \subset V$, that is, $W$ satisfies
+  \[
+    \rho(g)(\bm{w}) \in W \qquad (\forall \bm{w} \in W, \forall g \in G)
+  \]
+  and $W$ is a representation of $G$ under the map $\rho$.
+\end{defn}
+
+\begin{defn}[Reducibility]
+  A $G$-representation $(\rho, V)$ is \emph{irreducible} if it contains no
+  proper invariant subspaces.  It's \emph{completely reducible} if it may be
+  decomposed into a direct sum of irreducible representations.
+\end{defn}
+
+\begin{defn}[Quotient representation]
+  Let $(\rho, V)$ be a representation of group $G$, $W$ is a subspace of $V$.
+  The action map of the \emph{quotient representation} is defined through the
+  action map of the original representation, $\widetilde{\rho} : G \times V/W \to V/W$:
+  \[
+    \widetilde{\rho}(g)(\bm{v} + W) \triangleq \rho(g)(\bm{v}) + W
+  \]
+\end{defn}
+
+\subsection{Complete Reducibility for Finite Groups}
+
+In this section, we establishes the reducibility theorem of representations of
+finite groups. The main result is the theorem that every $\C$ representation
+admits a unique decomposition into irreducible representations.
+
+\begin{defn}[Unitary representation]
+  Let $G$ be a group, a representation $(\rho,V)$ is \emph{unitary} if there
+  exist a positive definite Hermitian inner product $H$ that is invariant under
+  $G$-actions, that is,
+  \[
+    H(v,w) = H(gw, gw) \qquad (\forall v,w \in V, \forall g \in G)
+  \]
+
+  A representation is called \emph{unitarisable} if it can be equipped with such
+  an inner product.
+\end{defn}
+
+\begin{lem}\label{ortho-inv}
+  Let $V$ be a unitary representation of finite group $G$, $W$ is an invariant
+  subspace. Then $W^{\perp}$ is also an invariant subspace.
+\end{lem}
+
+\begin{proof}
+  Let $w' \in W^{\bot}$, $g \in G$ be given.  Let $H$ be the inner product on
+  $V$ that is invariant under $G$-actions (we call such an inner product
+  \emph{$G$-equivariant}).  Then, we have,
+  \begin{align*}
+    & H(w,w') = 0 && \text{definition of orthogonal set}\\
+    \Leftrightarrow \ & H(gw, gw') = 0 && \text{invariance}\\
+    \Leftrightarrow \ & H(w, gw') = 0  && g^{-1}gw = w \in W\\
+    \Leftrightarrow \ & gw' \in W^{\bot} && \text{definition}
+  \end{align*}
+  Thus, $W^{\bot}$ is an invariant subspace.
+\end{proof}
+
+\begin{lem}\label{fin-decompose}
+  Let $G$ be a finite group, $(\rho, V)$ be a representation of $G$ ($\dim V <
+  \infty$), $W$ be a subrepresentation of $V$.  Then, there exist a
+  complementary invariant subspace $W'$ of $V$ such that $V = W \oplus W'$.
+\end{lem}
+
+\begin{proof}
+  We will prove the theorem by using inner products and Weyl's technique of
+  averaging over the group.
+
+  Let $H_0$ be an arbitrary Hermitian inner product of $V$, we construct a
+  Hermitian inner product that is invariant under $G$-actions as follows:
+  \[
+    H(v,w) \triangleq \sum_{g \in G} H_0(gv, gw)
+  \]
+  We verify the invariance: let $g \in G$ be given, we would like to show
+  \[
+    H(gv, gw) = \sum_{g' \in G} H_0(g'gv, g'gw) \stackrel{?}{=} \sum_{h \in G}
+    H(hv, hw) = H(v,w)
+  \]
+  It suffices to show, for any $g \in G$, there exists a bijection: $Gg \cong
+  G$.  From left to the right, let $g' \in G$ be given, we simply put $h = g'g$.
+  From right to left, let $h \in G$ be given, we define $g' = hg^{-1}$.
+
+  By \ref{ortho-inv}, since $V$ is unitary, $W^{\bot}$ is an invariant subspace
+  and orthogonal decomposition $V = W \oplus W^{\bot}$.
+\end{proof}
+
+\begin{cor}[Complete reducibility]\label{fin-decompose-exist}
+  Any representation of a finite group (hence must be finite dimensional) admits
+  an orthogonal decomposition into irreducible sub-representations.
+\end{cor}
+
+\begin{proof}
+  Finite decomposition using \ref{fin-decompose}.
+\end{proof}
+
+Now, we would like to show that such a decomposition is unique.
+
+\begin{lem}\label{im-ker-inv}
+  Let $V$, $W$ be representations of a finite group $G$, $\phi \in \Hom^G(V,W)$, then
+  \begin{enumerate}
+    \item
+      $\Ima \phi$ is an invariant subspace of $W$
+    \item
+      $\ker \phi$ is an invariant subspace of $V$.
+  \end{enumerate}
+\end{lem}
+
+\begin{proof}\
+  \begin{enumerate}
+    \item
+      Let $w \in \Ima \phi$ be given, then there exist $v \in V$ such that $\phi(w)
+      = w$.  Since $\phi$ commutes with group actions,
+      \[
+        \phi(gv) = g\phi(v) = gw
+      \]
+      Thus, $gw \in \Ima \phi$.
+
+    \item
+      Let $v \in \ker \phi$ be given, then $\phi(v) = 0 \in W$. Since $\phi$
+      commutes with group actions, and group actions preserves vector space structure,
+      \[
+        \phi(gv) = g\phi(v) = g0 = 0
+      \]
+      Thus $gv \in \ker \phi$.
+    \end{enumerate}
+\end{proof}
+
+\begin{lem}[Schur's Lemma]
+  Let $V$, $W$ be irreducible representations of finite group $G$, $\phi \in \Hom^G(V,W)$.
+  Then
+  \begin{enumerate}
+    \item Either $\phi$ is an isomorphism or $\phi \equiv \bm{0}$.
+    \item If $V = W$, then $\phi = \lambda \cdot I$ for some $\lambda \in
+      \C$, where $I$ is the identity map.
+  \end{enumerate}
+\end{lem}
+
+\begin{proof}\
+  \begin{enumerate}
+    \item Follows from \ref{im-ker-inv}.
+    \item Since $\C$ is algebraically closed, $\phi$ has at least one
+      eigenvalue $\lambda$, let $\bm{v} \neq 0$ be the associated eigenvector, then
+      $\phi \bm{v} = \lambda \bm{v} \Rightarrow (\phi - \lambda \cdot I)\bm{v} =
+      \bm{0}$, hence $(\phi - \lambda \cdot I)$ is not injective, by (1), it
+      must be $0$, thus $\phi = \lambda \cdot I$.
+  \end{enumerate}
+\end{proof}
+
+\begin{thm}(Uniqueness of decomposition)
+  Any representation $(\rho,V)$ of a finite group $G$ admits a unique orthogonal
+  decomposition into irreducible subrepresentations.
+  \[
+    V = \bigoplus V_j^{\oplus e_j}
+  \]
+  or equivalently, we may express the decomposition through the action
+  \[
+    \rho = \sum_{j} m_j \rho_j
+  \]
+\end{thm}
+
+\begin{proof}
+  Existence is given by \ref{fin-decompose-exist}.
+  Suppose $V = \bigoplus W_k^{\oplus f_k}$ is another decomposition, then
+  consider the identity map $\bm{1} : V \to V$ that maps $\bigoplus V_j^{\oplus
+    e_j}$ to $\bigoplus W_k^{\oplus f_k}$, then by Schur's Lemma, it must be the
+  case that $\bm{1}$ maps $V_j^{\oplus e_j}$ into $W_k^{\oplus f_k}$ where $V_j$
+  and $W_j$ are isomorphic and $e_j = f_k$.  This proves the uniqueness.
+\end{proof}
+
+
+% \subsection{Character Theory for Finite Groups}
+
+% In this section, we discuss a very important numerical invariant of
+% representations of groups.  They are important in the sense that they
+% essentially determines representations they are associated to.
+
+% We will first develop results of character theory with finite groups, and in
+% latter sections, we will show how analogous definitions and theorems may be
+% obtained with compact groups.  In this section, we only discuss representations
+% on field $\C$, and $G$ will denote a finite group.
+
+% \begin{defn}[Character]
+%   Let $(\rho,V)$ be a representation of $G$, it's character $\chi_{V}$ is
+%   the complex-valued function of $G$ defined by
+%   \[
+%     \chi_V(g) \triangleq \Tr_V(\rho(g))
+%   \]
+%   where $\Tr_V(\rho(g))$ is the trace of $\rho(g) \in GL(V)$ on $V$.  By
+%   properties of trace, we have $\chi_V(hgh^{-1}) = \chi_V(g)$. Thus the
+%   character is constant on the conjugacy classes of $G$, such a function is
+%   called a \emph{class function}.
+% \end{defn}
+
+% The definition above gives a number of nice properties about characters:
+
+% \begin{prop}
+%   Let $V$ be a representation of $G$. Then
+%   \begin{enumerate}
+%     \item[(1)] $\chi_V(1) = \dim V$
+%     \item[(2)] $\chi_V(g^{-1}) = \conj{\chi_V(g)}$
+%     \item[(3)] $\chi_{V^*}(g) = \chi_V(g^{-1})$
+%   \end{enumerate}
+% \end{prop}
+
+% \begin{prop}\label{char-prop}
+%   Let $V$, $W$ be representations of $G$. Then
+%   \[
+%     \chi_{V \oplus W} = \chi_{V} + \chi_{W},
+%     \quad
+%     \chi_{V \otimes W} = \chi_{V} \cdot \chi_{W}
+%   \]
+% \end{prop}
+
+% \begin{thm}
+%   A general statement of \ref{char-prop} is: the character is a ring
+%   homomorphism from $R_G$ to the class functions on $G$. It takes the involution
+%   $V \leftrightarrows V^*$ to complex conjugation.
+% \end{thm}
+
+% \begin{proof}
+%   To be elaborated.
+% \end{proof}
+
+% Let $\mathcal{F}(G)$ denote the space of function on group $G$, we can define an
+% Hermitian inner product on this space: Given $\phi, \psi \in \mathcal{F}(G)$,
+% \[
+%   H(\phi,\psi) \triangleq \frac{1}{\abs{G}} \sum_{g \in G} \conj{\phi(g)} \cdot \psi(g)
+% \]
+% If we sum over conjugacy classes of $G$, we obtain an inner product of the space
+% of class functions on $G$:
+% \[
+%   H(\phi,\psi) \triangleq \frac{1}{\abs{G}} \sum_{C \subset G} \abs{C} \cdot
+%   \conj{\phi(C)} \psi(C)
+% \]
+
+% \begin{lem}
+%   Let $(\rho, V)$, $(\pi, W)$ be irreducible representations of $G$, let $T \in
+%   \Hom^G(V, W)$, define
+%   \[
+%     \widetilde{T} = \frac{1}{\abs{G}} \sum_{g \in G} \pi(g) \circ \phi \circ \rho(g)^{-1}
+%   \]
+%   then,
+%   \begin{enumerate}
+%     \item[(1)] $\widetilde{T} \in \Hom^G(V,W)$.
+%     \item[(2)] If $V = W$, then $\Tr T = \Tr \widetilde{T}$.
+%   \end{enumerate}
+% \end{lem}
+
+% \begin{proof}
+% \end{proof}
+
+% \begin{thm}[Orthogonality of characters]
+%   Let $V$, $W$ be irreducible representations of $G$, then If $V$, $W$ are
+%   equivalent, then $H(\chi_V, \chi_W) = 1$, else $H(\chi_V, \chi_W) = 0$.
+% \end{thm}
+
+% \begin{proof}
+% \end{proof}
+
+% \begin{cor}
+%   Let $(\rho, V)$ be a representation of $G$, and it admits a decomposition
+%   $\rho = \sum_{j} m_j \rho_j$ then, $m_j = H(\chi_V, \chi_{V_j})$.
+% \end{cor}
+
+% \begin{cor}
+%   A representation $(\rho, V)$ is irreducible iff $\norm{\chi_{V}}^2 = 1$.
+% \end{cor}
+
+% \begin{cor}
+%   Two representations are equivalent iff they have the same character.
+% \end{cor}

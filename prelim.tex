@@ -1,0 +1,243 @@
+\section{Preliminaries}
+
+Let $G$ be a group, that is, an underlying set $\mathbb{G}$ with operations that
+give $\mathbb{G}$ the group structure, if we further enforce a topological
+structure on $\mathbb{G}$, then we can treat it as a topological space given
+those algebraic operations are continuous. We call $G$ a \emph{topological group}.
+
+Some examples of topological groups include the group $\R^{\times}$ of real
+numbers under multiplication: its' topology was induced from the metric $d(x,y)
+= \abs{x - y}$.  Since the topology of $\R^{\times}$ is the usual one induced by
+the metric, by $\epsilon-\delta$ argument, it's easy to show the map $(x,y)
+\mapsto x \times y$ from $\R^2$ to $\R$ is continuous.
+
+Another example of a topological group that is closely related to Fourier
+analysis is the circle group $\T = \SetForm{z \in \C}{\abs{z} = 1}$, under
+multiplication.  Equivalently, we can represent elements of $\T$ in polar
+coordinates: $\T = \SetForm{e^{i\theta}}{\theta \in [-\pi,\pi]}$.  The
+multiplicative identity is $e^{0} = 1$, and inverse operations is simply
+$\left(e^{i\theta} \right)^{-1} = e^{-i\theta}$.
+
+Apparently, $\T$ is not a finite group since the interval $[-\pi, \pi]$ is
+uncountable, it's a topological group where the topological structure is
+inherited from the usual topological structure of $\C$. Furthermore, $\T$ is a
+compact group since we know the unit circle is compact in $\C$.
+
+\subsection{Measure Theory Backgrounds}
+
+Let $X$ be a topological space, we say $X$ is a \emph{measure space} if there
+exist a $\sigma$-algebra $\mathfrak{M}$ in $X$, that is, a family of subsets of
+$X$ containing $X$ and is closed under taking complements and countable union.
+We call elements of $\mathfrak{M}$ \emph{measurable sets}. Let $f : X \to Y$ be
+a map from a measurable space $X$ to a topological space $Y$ \emph{measurable}
+if for every open set $V$ in $Y$, the pullback $f^{-1}(V)$ is a measurable set.
+
+Let $\mathcal{T}$ be a topology on $X$, let $\Omega$ be a family of all
+$\sigma$-algebras in $X$ that contains $\mathcal{T}$.  Then by intersecting all
+elements in this family, we have a \emph{smallest} $\sigma$-algebra
+$\mathcal{B}$ that contains all open sets of $X$, we refer to elements of
+$\mathcal{B}$ as \emph{Borel sets}.
+
+Given $(X,\mathfrak{M})$ a measure space, we define a \emph{measure} to be a map
+$\mu : \mathfrak{M} \to [0,\infty]$ that is countably additive. This means, for
+any disjoint countable collection $\{A_j\} \subset \mathfrak{M}$,
+\[
+  \mu\left( \bigcup_{j = 0}^{\infty} A_j \right) = \sum_{j = 0}^{\infty} \mu(A_j)
+\]
+If the $\sigma$-algebra above is the collection of Borel sets of $X$, then we
+call the measure a \emph{Borel} measure.  We say the Borel measure is
+\emph{regular} if it satisfies, for all measurable set $X$,
+\[
+  \mu(X) = \inf \SetForm{\mu(U)}{U \supset X, U \text{ open}} = \sup
+  \SetForm{\mu(K)}{K \subset X, K \text{ compact}}
+\]
+If the topological space $G$ is a \emph{locally compact} group (i.e. every point
+of $G$ has a compact neighborhood), there is, up to a constant multiple, a
+unique regular Borel measure $\mu_L$ that is invariant under left translation.
+By \emph{left translation invariance}, we mean $\mu_L(X) = \mu_L(gX)$ for all
+measurable sets $X$ and $g \in G$.  We call such measure a \emph{left Haar
+  measure}, it should also satisfy $\mu_L(X) < \infty$ for $X$ compact and
+$\mu_L(X) > 0$ for all $X$ measurable. (For the existence and uniqueness of
+$\mu_L$, see \cite{halmos2013measure}).  Similarly, we can also define
+\emph{right Haar measure}.  Usually left and right Haar measure do not coincide
+for general topological groups, when they do, we call the group
+\emph{unimodular}.
+
+One of the main purpose of inventing the formalism of measure is to develop the
+theory of integration with respect to a given measure.  The idea of computing
+the integral $\int_X f(x) d\mu(x)$ is to approximate the function $f$ by
+\emph{simple functions}, that is, a linear combinations of characteristic
+function on measurable sets.  If $f : X \to \R$ is non-negative, define
+\[
+  \int_X f(x) d\mu(x) \triangleq \sup_{0 \leq s \leq f} \int_X s(x) d\mu(s)
+  = \sup_{0 \leq \sum \lambda_i \chi_{E_i} \leq f} \int_X \sum_{i = 0}^{n} \lambda_i \chi_{E_i}(x) d\mu(x)
+\]
+% Similar to the finite case, a representation of $G$ is a vector space $V$
+% associated with a group action $\pi$.  If $V$ is finite-dimensional, then the
+% action $\pi : G \to GL(V)$ is a continuous homomorphism where the topology of
+% $GL(V)$ is inherited from the space $End(V)$ of linear self-maps.  In this case,
+% we can define \emph{characters} similarly as a complex valued function
+% $\chi_{\pi}(g) = \Tr \pi(g)$, we say a character is \emph{irreducible} if it's a
+% character of a irreducible representation (i.e. contains no proper nonzero invariant spaces).
+
+% On the other hand, if $V$ is infinite dimensional, we instead say $V$ is
+% irreducible if it has no proper nonzero invariant \emph{closed} subspaces.
+
+Notice, if $\mu_L$ is a left Haar measure, then for $\gamma \in G$,
+\[
+  \int_G f(\gamma g) d \mu_L(g) = \int_G f(\gamma g) d\mu_L(\gamma g)
+\]
+substituting $h = \gamma g$, we have
+\[
+  \int_G f(\gamma g) d \mu_L(g) = \int_G f(g) d\mu_L(g)
+\]
+
+Similarly, to check $\mu_R$ is a right Haar measure, it amounts to check the
+integral
+\[
+  \int_G f(g \gamma) d \mu_L(g) \stackrel{?}{=} \int_G f(g) d \mu_L(g)
+\]
+
+Consider the conjugation map $\phi(g) : h \mapsto g^{-1} h g$, it's a
+automorphism on $G$ (with inverse being $\phi(g)^{-1} : h \mapsto g h g^{-1}$).
+Since left Haar measures are unique up to a constant multiple, the left Haar
+measure of $\phi_g(G)$ is a constant multiple of the left Haar measure of $G$.
+In another words, there exist a function $\delta : G \to \R_+^{\times}$ such that
+\[
+  \int_G f(\phi_g(h)) d\mu_L(h) = \delta(g) \int_G f(h) d\mu_L(h)
+\]
+
+Given $g_1, g_2 \in G$, since conjugating first by $g_1$ then by $g_2$ is
+equivalent to conjugating by $(g_2g_1)$, we have $\delta(g_2) \cdot \delta(g_1)
+= \delta(g_2g_1)$, the map $\delta$ is a group homomorphism.
+% Generally, we call a homomorphism from $G$ to $\C^{\times}$ a \emph{quasicharacter}.
+% Then composing
+% it in the integral $\int_G f(\phi g) d\mu_L(g)$ should given a constant multiple
+% of $\int_G f(g) d\mu_L(g)$.
+
+\begin{lem}
+  Let $\mu_L$ be a left Haar measure of $G$, let $\delta : G \to \R_+^{\times}$
+  be defined as above, then $\delta \cdot \mu_L$ is a right Haar measure of $G$.
+\end{lem}
+
+\begin{proof}
+  We verify the measure $\delta(h)\mu_L(h)$ is right invariant.  Let
+  $\widetilde{f} = f \cdot \delta$, then by definition of $\delta$,
+  \[
+    \int_G \widetilde{f}(g^{-1} h g) d\mu_L(h) =
+    \delta(g) \int_G \widetilde{f}(h) d\mu_L(h)
+  \]
+  Since $\mu_L$ is left invariant, left translate $\widetilde{f}$ by $g$ gives
+  \[
+    \int_G \widetilde{f}(hg) d\mu_L(h) = \delta(g) \int_G \widetilde{f}(h) d\mu_L(h)
+  \]
+  Since $\delta$ is a homomorphism, we expand the left hand side:
+  \[
+    \int_G f(hg) \delta(h) \delta(g) d\mu_L(h) = \delta(g) \int_G \widetilde{f}(h) d\mu_L(h)
+  \]
+  Canceling $\delta(g)$ from both sides, we have
+  \[
+    \int_G f(hg) \delta(h) d\mu_L(h) = \int_G \widetilde{f}(h) d\mu_L(h) =
+    \int_G f(h) \delta(h) d\mu_L(h)
+  \]
+  Thus, $\delta \cdot \mu_L$ is a right Haar measure.
+\end{proof}
+
+The property of Haar measure on compact groups follows from the Lemma above:
+
+\begin{lem}
+  Let $G$ be a compact group, then
+  \begin{enumerate}
+    \item[(1)] $G$ is unimodular
+    \item[(2)] $\mu_L(G) < \infty$
+  \end{enumerate}
+\end{lem}
+
+\begin{proof}
+  Let $\delta : G \to \R_+^{\times}$ be define as above.  Since $G$ is compact
+  and $\delta$ is continuous, the image $\Ima(\delta)$ is a compact subgroup of
+  $\R_+^{\times}$.  Since the only compact subgroup of $\R_+^{\times}$ is
+  trivial, the image is trivial.  Then the right Haar measure $\delta \cdot
+  \mu_L$ is equal to $\mu_L$, hence $G$ is unimodular.  Since $G$ is compact, by
+  assumption for Haar measure, $\mu(G) < \infty$.
+\end{proof}
+
+Since $\mu_L(G) < \infty$ and left Haar measures (also right Haar measure when
+$G$ is compact) are unique upto a constant multiple, we can pick a measure $\mu$
+such that the integral is normalized, that is, $\int_G 1 d\mu(g) = 1$. Without
+loss of generality, we will always consider Haar measures that normalizes the
+integral in later sections. For notational convenience, later in the paper we
+will use $dg$ in place for $d\mu(g)$.
+
+\subsection{Functional Analysis Machineries}
+
+In order to discuss whether we have ``enough'' matrix coefficients, we will
+first need to develop some results on linear operators, in particular
+on \emph{compact operators}.
+
+Let $\mathfrak{H}$ be a normed vector space with norm $\norm{-}$, a linear
+operator $T : \mathfrak{H} \to \mathfrak{H}$ (i.e. maps compatible with the
+linear structure of $\mathfrak{H}$) is called \emph{bounded} if there exist a
+constant $C$ such that
+\[
+  \norm{Tx} \leq C\norm{x} \qquad (\forall x \in \mathfrak{H})
+\]
+The smallest such constant is referred to as the \emph{operator norm} of $T$,
+denote by $\abs{T}$.  It's easy to see $T$ is bounded iff $T$ is continuous (on
+the metric topology given by the norm).
+
+We call the operator $T$ \emph{self-adjoint} if
+\[
+  \langle T f, g \rangle = \langle f, T g \rangle \qquad (\forall f,g \in \mathfrak{H})
+\]
+
+A bounded operator $T : \mathfrak{H} \to \mathfrak{H}$ is \emph{compact} if
+given any bounded sequence $\{x_1, x_2, \ldots\} \subset \mathfrak{H}$, the
+image sequence $\{Tx_1, Tx_2, \ldots\}$ has a convergent subsequence.
+
+For $f,g \in \mathfrak{H}$, we call $f$ an \emph{eigenvector} with
+\emph{eigenvalue} $\lambda$ of $T$ if $f \neq 0$ and $Tf = \lambda f$. As usual,
+we call the space $\SetForm{f \in \mathfrak{H}}{f \neq 0, Tf = \lambda f} \cup \{0\}$ the
+$\lambda$-eigenspace.
+
+\begin{thm}[Spectral theorem for compact operators] \label{spectral}
+  Let $T$ be a compact self-adjoint operator on a Hilbert space $\mathfrak{H}$.
+  Let $\mathfrak{N}$ be the nullspace of $T$. Then
+  \begin{enumerate}
+    \item[(1)] the Hilbert space dimension of $\mathfrak{N}^{\perp}$ is at most countable.
+    \item[(2)] $\mathfrak{N}^{\perp}$  has an orthonormal basis
+      $\{\phi_i\}_1^{\infty}$ of eigenvectors of $T$, and associated set of
+      eigenvalues $\{\lambda_i\}_1^{\infty}$.
+    \item[(3)] If $\mathfrak{N}^{\perp}$ is not finite-dimensional, the
+      eigenvalues $\lambda_i \to 0$ as $i \to \infty$.
+  \end{enumerate}
+\end{thm}
+
+\begin{proof}
+  See Theorem 4.11-1 in \cite{ciarlet2013linear}.
+\end{proof}
+
+Notice, if $\mathfrak{N}^{\perp}$ is not finite-dimensional, then each
+$\lambda_i$ may only appear finitely many times in the sequence of eigenvalues,
+hence there are only finitely many eigenvectors associated with $\lambda_i$, the
+$\lambda_i$-eigenspace is finite.
+
+Let $X$, $Y$ be compact topological spaces, $Y$ is has a metric $d$.  Let $U$ be
+a set of continuous maps $X \to Y$, we call $U$ being \emph{equicontinuous} if
+for every $x \in X$ and $\epsilon > 0$, there exists a neighborhood $N \ni x$
+such that
+\[
+  d(f(x), f(x')) < \epsilon \qquad (\forall x' \in N, f \in U)
+\]
+
+The following theorem relates equicontinuity with compactness:
+
+\begin{thm}[Ascoli and Arzela] \label{ascoli-arzela}
+  Let $X$ be a compact space, $U \subset C(X)$ is a bounded subset of continuous
+  functions, with the sup-norm metric. Suppose $U$ is equicontinuous, then every
+  sequence in $U$ has a uniformly convergent subsequence.
+\end{thm}
+
+\begin{proof}
+  See Theorem 3.10-1 in \cite{ciarlet2013linear}.
+\end{proof}

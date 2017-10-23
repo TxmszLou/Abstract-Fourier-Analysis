@@ -1,0 +1,88 @@
+% \documentclass[a4paper,12pt,twoside]{amsart}
+\documentclass{amsart}
+% \documentclass{article}
+
+
+% \topmargin=+3pt
+
+% \headsep=18pt
+
+% \oddsidemargin=-6pt
+% \evensidemargin=-6pt
+
+% \renewcommand{\baselinestretch}{1.2}
+
+% \textwidth=467pt \textheight=655pt
+
+\input{preamble.tex}
+
+\DeclareMathOperator{\bv}{\bm{v}}
+\DeclareMathOperator{\bu}{\bm{u}}
+\DeclareMathOperator{\bw}{\bm{w}}
+
+\begin{document}
+
+% \title{Peter-Weyl's Theorem (draft)}
+\author{Thomas S. Lou}
+\title{Abstract Fourier Analysis}
+\address{University of Washington}
+\email{lous\char`\@cs.washington.edu}
+\date{\today}
+\maketitle
+
+\begin{abstract}
+In this paper, we will discuss abstract Fourier analysis on arbitrary groups, in
+particular, we will discuss complete reducibility of representations of finite
+groups and of compact groups.
+\end{abstract}
+
+\tableofcontents
+
+\newpage
+
+
+
+\input{intro.tex}
+% \newpage
+\input{prelim.tex}
+% \newpage 
+\input{finite-groups.tex}
+% \newpage
+\input{compact-groups.tex}
+% \newpage
+% \input{compact-abel-group.tex}
+
+\section{Conclusion}
+
+The theory Fourier of analysis was long developed throughout the history: it was
+first developed in $16$th century to study the physical phenomenon of vibration
+of strings and to solve partial differential equations associated with it.  It
+later became one of the core problems in analysis and relates to varies areas of
+mathematics.  For example, it has relates intimately to the representation
+theory on compact groups as we have explored in this paper.
+
+In fact, if we put more restriction on the case we studied and let $G$ be a
+compact \emph{abelian} group (of which $\T$ still is one archetypal example),
+there is an even more remarkable symmetry between representation theory and
+Fourier analysis: characters of $G$ form an orthonormal basis of $L^2(G)$ and
+Fourier Transform and Fourier inversion formulas gives an isomorphism between
+$G$ and the dual group $\hat{G}$ of its characters.
+
+% Fourier analysis was studied extensively in the $20$th century and
+% remains a
+
+
+% \section{Categorified Fourier Analysis}
+
+% \begin{thm}
+%   The category of representations of group $G$ is equivalent to the category of
+%   vector spaces parametrized by the dual group $\hat{G}$ of characters.
+% \end{thm}
+
+
+\newpage
+\bibliographystyle{amsplain}
+\nocite{*}
+\bibliography{refs}
+
+\end{document}

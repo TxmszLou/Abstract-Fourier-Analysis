@@ -1,0 +1,803 @@
+
+\section{Compact Groups}
+
+% In previous sections, we have shown the existence and the uniqueness of
+% isotypic decomposition of representations of finite groups.  However, the major
+% theorem we would like to prove was about the similar decomposition but for
+% general compact groups.
+
+% In the following section, we will introduce notions of compact groups, and
+% properties of representations on them: can they be decomposed, is the
+% decomposition is isotypic?
+% explore the classical development of
+% representation theory of compact groups.
+
+% \begin{defn}[Topology]
+%   A collection $\tau$ of subsets of set $X$ is said to be a \emph{topology} of
+%   $X$ if it satisfies:
+%   \begin{enumerate}
+%     \item[(i)] $\varnothing \in \tau$, $X \in \tau$
+%     \item[(ii)] If $V_i \in \tau$ for $i = 1, \ldots , n$, then $\bigcap_{i = 1}^{n} V_i \in \tau$
+%     \item[(iii)] If $\{V_{\alpha}\}_{\alpha \in I}$ in an arbitrary collection
+%       of subsets of $\tau$, then $\bigcup_{\alpha \in I} V_{\alpha} \in \tau$.
+%   \end{enumerate}
+
+%   If $\tau$ is a topology of $X$, then $X$ is called a \emph{topological space},
+%   whose open sets are elements in $\tau$.  $X$ is \emph{locally compact} if
+%   every point in $X$ has a compact neighborhood.
+
+%   A function $f : X \to Y$ between two topological spaces are said to be
+%   \emph{continuous} if $f^{-1}(V)$ is open for every $V \subset Y$ open. $f$ is
+%   said to be \emph{continuous at $x_0$} if to every neighborhood (open set) $V
+%   \ni f(x_0)$, there exist a corresponding neighborhood $W \ni x_0$ such that
+%   $f(W) \subset V$.
+% \end{defn}
+
+We would like to answer the similar question about complete reducibility on
+general compact groups.  Is it possible to develop similar results on finite
+reducibility for general compact group?  Is it possible for us to adapt proofs
+in the finite case to compact groups?
+
+We will provide a affirmative answer to the first question: we will be able to
+show the reducibility of representation of a compact group into a orthonormal
+set of irreducible representations, each of them is finite dimensional.
+However, unfortunately we cannot adapt most of the proofs in the finite case to
+the compact case (in fact, the only theorem we developed previously may be
+carried over to the compact case is Schur's Lemma and complete reducibility of
+\emph{finite} representations).
+% We will need to develop a quite large
+% toolbox of machineries that allow us to establish the result for arbitrary
+% representations.
+
+In short, the orthogonality will be established by Schur's orthogonality
+theorem, and the complete reducibility will be established by Peter-Weyl's
+Theorem. 
+
+
+% \begin{exa}
+%   Consider group
+%   \[
+%     G = \SetForm{\begin{pmatrix} y & x\\ 0 & 1 \end{pmatrix}}{x,y \in \R, y > 0}
+%   \]
+%   It has left- and right-invariant measures:
+%   \[
+%     d\mu_L = y^{-2} dx dy,
+%     \quad
+%     d\mu_R = y^{-1} dx dy
+%   \]
+% \end{exa}
+
+\subsection{Complete Reducibility for Finite Representations}
+
+Let $G$ be a compact group, similar to the finite case, we can define the notion
+of a representation of $G$:  at the most general setting, a
+\emph{representation} of $G$ is simply a group homomorphism $f : G \to H$, where
+the group $H$ is not even necessarily associated with a linear structure.
+However, in this paper, we will be only interested in \emph{linear
+  representations}, thus $H = \End(V)$ for some vector space $V$.  However, in
+contrast with the finite case, here $V$ may not have a finite basis.  When $V$
+is infinite dimensional and is associated with a topology, we say $(\pi,V)$ is
+\emph{irreducible} if it has no proper nonzero invariant \emph{closed}
+subspaces.
+
+In the following sections, we will be interested in general of $V$ being a
+Hilbert space, that is, an inner product space which is complete under the norm
+induced by the inner product. In particular, we will be interested in the
+Hilbert space $L^2(G)$ of square integrable functions on $G$. The inner product
+is given by conjugate integration (this is why we developed the theory of
+integration on compact groups with Haar measures earlier):
+\begin{equation} \label{Hilbert-inner-product}
+  \langle f_1 , f_2 \rangle_{L^2} \triangleq \int_G f_1(g) \conj{f_2(g)} dg
+\end{equation}
+In addition, $L^2(G)$ is indeed a complete metric space with the metric induced
+by the inner product defined above, for a detailed examination, see Theorem 3.11
+in \cite{rudin1987real}.
+
+In fact, similar to the case of finite group, in the general case of $G$ being a
+compact group, we can show the existence of an $G$-equivariant inner product.
+This also means, every finite dimensional representation of a compact group is
+\emph{unitarisable}.
+
+\begin{thm}
+  Let $G$ be a compact group and $(\pi,V)$ be a finite dimensional
+  representation of $G$, then $V$ admits a $G$-equivariant inner product.
+\end{thm}
+
+\begin{proof}
+  We will again apply Weyl's trick of averaging over the group $G$, but this
+  time by integrating over $G$: let $H_0(,)$ be an arbitrary inter
+  product on $G$, define
+  \[
+    H(v,w) \triangleq \int_G H_0(\pi(g)v, \pi(g)w) dg
+  \]
+  Then, $H(,)$ is $G$-equivariant by construction.
+\end{proof}
+
+If we replace ``sum over group finite group $G$'' by ``integrate over compact
+group $G$'' in \Cref{ortho-inv} and \Cref{fin-decompose}, etc. The result of
+complete reducibility follows for \emph{finite} representations of compact group
+$G$.
+
+% \begin{thm}
+%   Let $(\rho,V)$ be a finite dimensional unitary representation of compact group
+%   $G$, $W$ is an invariant subspace of $V$. Then $W^{\perp}$ is also an
+%   invariant subspace of $V$.
+% \end{thm}
+
+% \begin{thm}
+%   Let $G$ be a compact group, $(\rho,V)$ be a finite dimensional representation
+%   of $G$, $W$ be a subrepresentation of $V$.  Then there exist a complementary
+%   invariant subspace $W'$ of $V$ such that $V = W \oplus W'$.
+% \end{thm}
+
+\begin{thm}[Complete reducibility for finite representations]
+  Any finite representation of a compact group $G$ admits an orthogonal
+  decomposition into irreducible sub-representations.
+\end{thm}
+
+Now, let's step to the complete reducibility of arbitrary representations.
+
+\subsection{Matrix Coefficients}
+
+Let $G$ be a compact group, $(\pi,V)$ be a representation of $G$.  Then if $V$
+is finite dimensional, by choosing a basis for $V$, we can write out the matrix
+representation of the linear map $\pi(g)$ for every $g \in G$.  Or equivalently,
+we have a collection of functions $\phi_{ij} : G \to \C$ that tells us what is
+the value of the $(i,j)$th matrix entry of $\pi(g)$.  Even more importantly, if
+we are able to construct such a collection of functions, then we also obtain a
+representation of $G$! The question is, how do we construct this collection of
+functions?
+
+Let's brute force through one possible construction. Under the given basis $B =
+\{e_i\}_{i = 1}^{n}$, suppose we have a vector $v = (v_1, \ldots, v_n)^{T} =
+\sum_1^n v_i e_i$ and an element $g \in G$. Suppose the matrix $\pi(g)$ is
+represented by:
+\[
+  \begin{pmatrix}
+    \phi_{11}(g) & \cdots & \phi_{1n}(g)\\
+    \vdots & \ddots & \vdots\\
+    \phi_{n1}(g) & \cdots & \phi_{nn}(g)
+  \end{pmatrix}
+\]
+
+Computing $\phi(g)(v)$ gives, $\pi(g)(v) = (\sum_{1}^{n} \phi_{1i}(g) \cdot v_i,
+\cdots, \sum_{1}^{n} \phi_{ni}(g) \cdot v_i)^{T}$, hence $\pi_{ij}(g) =
+L_i(\pi(g)e_j)$, where $L_i$ is a linear functional on $V$ that picks out the
+$i$-th component of the vector, $L_i(\sum a_j e_j) = a_i$.
+
+This motivates us to define \emph{matrix coefficients}, an
+abstract characterization of those family of functions independent of choices of
+a basis or even a concrete vector space $V$.
+
+\begin{defn}[Matrix Coefficients]
+  Let $G$ be a group, $(\pi, V)$ be a finite dimensional representation of $G$,
+  then \emph{matrix coefficients} on $G$ are maps of the form
+  \[
+    \phi : g \mapsto L(\pi(g)v)
+  \]
+  for $L \in V^*$, $v \in V$.
+\end{defn}
+
+Let $\mathcal{M}_{\pi}$ denote the set of matrix coefficients of representation
+$(\pi,V)$, then it forms a vector space. Furthermore, we can show an intimate
+relation between matrix coefficients and the dual representation.
+
+\begin{prop} \label{dual-mat-coeff}
+  $f$ is a matrix coefficient of $(\pi,V)$ iff $\check{f}(g) \triangleq
+  f(g^{-1})$ is a matrix coefficient of the dual representation $(\hat{\pi},V^*)$.
+\end{prop}
+
+\begin{proof}
+  By the identification $V \simeq V^{**}$, from left to right:
+  \[
+    \check{f}(g) = f(g^{-1}) = L(\pi(g^{-1})v) = (L \circ \pi(g)^{-1}) v = v^{**}(\hat{\pi}(g))
+  \]
+  From right to left:
+  \[
+    f(g) = \check{f}(g^{-1}) = v^{**}(\hat{\pi}(g^{-1})) = (L \circ \pi(g)) v = L(\pi(g)v)
+  \]
+\end{proof}
+
+Since the vector space associated with matrix coefficients are
+finite dimensional, by straightforward linear algebra, we may check the set of
+linear functionals $B^* = \{L_i\}_{i = 1}^{n}$ induced from the basis $B =
+\{e_i\}_{i = 1}^{n}$ for $V$ is a basis for the dual space $V^*$.  Hence
+$\dim(\mathcal{M}_{\pi}) \leq \dim(V)^2$. This allows us to prove the following
+theorem.
+
+Let $\lambda(g)f$ and $\rho(g)f$ denote left and right translations by $g$ respectively,
+\begin{equation}
+  \label{eq:LR-translation}
+  \lambda(g)(f) = x \mapsto f(g^{-1}x),
+  \qquad
+  \rho(g)(f) = x \mapsto f(xg)
+\end{equation}
+
+\begin{thm} \label{left-right-finite}
+  Let $f$ be a function on $G$. Then the followings are equivalent:
+  \begin{enumerate}
+    \item $\lambda(g)f$ spans a finite dimensional vector space.
+    \item $\rho(g)f$ spans a finite dimensional vector space.
+    \item $f$ is a matrix coefficient of a finite dimensional representation.
+  \end{enumerate}
+\end{thm}
+
+\begin{proof}
+  Firstly, suppose (3), let $(\pi,V)$ be a finite dimensional representation of
+  $G$ and $f(h) = L(\pi(h)v)$, then $(\lambda(g)(f))(h) = f(g^{-1}x) =
+  L(\pi(g^{-1}x)v)$ and $(\rho(g)(f))(h) = f(xg) = L(\pi(xg)v)$, they are also
+  matrix coefficients of $V$.  Because $\dim(V) < \infty$,
+  $\dim(\mathcal{M}_{\pi}) \leq \dim(V)^2$, the vector spaces spanned by left
+  and right translations also have finite dimension, hence $(3) \Rightarrow
+  (1),(2)$.
+
+  Suppose $\rho(g)(f)$ spans a vector space $V \subset \Hom(G,\C)$, $\dim(V) <
+  \infty$, then $(\rho,V)$ is a representation of $G$: the action is $\rho(g)(v)
+  = x \mapsto v(xg)$.  Define a linear functional $L \in V^* \subset
+  \Hom(\Hom(G,\C),\C)$ by $L(\phi) = \phi(1)$, where $1$ is the unit of $G$.
+  Then $L(\rho(g)f) = (\rho(g)(f))(1) = f(g1) = f(g)$, $f$ is indeed a matrix
+  coefficient of $V$, hence $(2) \Rightarrow (3)$.
+  
+  Finally, suppose $\lambda(g)(f)$ spans a vector space $V \subset \Hom(G,\C)$,
+  $\dim(V) < \infty$. Let $\check{f}(h) = f(h^{-1})$ as usual, and define
+  $\widetilde{V}$ by
+  \begin{align*}
+    \widetilde{V} & = \SetForm{\lambda(g)f \circ (-)^{-1} \in \Hom(G,\C)}{g \in G}\\
+    & = \SetForm{h \mapsto f(g^{-1}h^{-1})}{g \in G}
+    = \SetForm{\rho(g)(\check{f})}{g \in G}
+  \end{align*}
+
+  Then $\dim(\widetilde{V}) < \infty$, by the previous argument, $\check{f}$ is
+  a matrix coefficient, by \Cref{dual-mat-coeff}, $f$ is a matrix coefficient.
+  Hence, $(1) \Rightarrow (3)$.
+\end{proof}
+
+\subsection{Schur's Orthogonality}
+
+Before we dive into the discussion of orthogonality of matrix coefficients, we
+firstly recall a remarkable theorem in functional analysis that uniquely
+determines the forms of continuous linear functionals on a Hilbert space by its
+inner product.
+
+\begin{thm}[F. Riesz representation theorem in a Hilbert space] \label{riesz-rep-thm-hilbert}
+  Let $(H,\langle \cdot, \cdot \rangle)$ be a Hilbert space over $\R$ or $\C$.  Then, given any
+  continuous linear functional $l \in H^*$, there exist one and only one vector
+  $y_l \in H$ such that
+  \[
+    l(x) = \langle x, y_l \rangle \qquad (\forall x \in H)
+  \]
+\end{thm}
+
+\begin{proof}
+  See Theorem 4.6-1 in \cite{ciarlet2013linear}.
+\end{proof}
+
+Hence, if $(\pi,H)$ is a finite dimensional representation of compact group $G$,
+then all matrix coefficients of $H$ are of the from $g \mapsto L(\pi(g)v) =
+\langle \pi(g)v, y_L \rangle$ for some $y_L \in H$.
+
+\begin{lem}\label{schur-con-inter-op}
+  Let $G$ be group, $(\pi_1, V_1)$ and $(\pi_2, V_2)$ be (complex)
+  representations of $G$. Let $\langle , \rangle$ be any inner product on $V_1$.
+  If $v_i,w_i \in V_i$, then the map $T : V_1 \to V_2$ defined by
+  \[
+    T(w) = \int_G \langle \pi_1(g)w,v_1 \rangle \cdot \pi_2(g^{-1}) v_2 dg
+  \]
+  is an interwining operator between $V_1$ and $V_2$.
+\end{lem}
+
+\begin{proof}
+  We want to show, given $h \in G$,
+  \[
+    \pi_2(h)(T(v)) \stackrel{?}{=} T(\pi_1(h)(v))
+  \]
+  Let's expand the definition on the right hand side:
+  \begin{align*}
+    T(\pi_1(h)(v)) & = \int_G \langle \pi_1(g)(\pi_1(h)(v)),v_1 \rangle \cdot \pi_2(g^{-1}) v_2 dg\\
+                   & = \int_G \langle \pi_1(gh)(v),v_1 \rangle \cdot \pi_2(g^{-1}) v_2 dg
+  \end{align*}
+  By change of variable $g \mapsto gh^{-1}$ gives:
+  \begin{align*}
+    T(\pi_1(h)(v)) & = \int_G \langle \pi_1(g)(v),v_1 \rangle \cdot \pi_2(hg^{-1}) v_2 d(gh^{-1})\\
+                   & = \int_G \langle \pi_1(g)(v),v_1 \rangle \cdot \pi_2(h)(\pi_2(g^{-1}) v_2) d(gh^{-1})\\
+                   & = \int_G \langle \pi_1(g)(v),v_1 \rangle \cdot \pi_2(h)(\pi_2(g^{-1}) v_2) dg && \text{(right invariance)}\\
+                   & = \int_G  \pi_2(h) (\langle \pi_1(g)(v),v_1 \rangle \cdot (\pi_2(g^{-1}) v_2)) dg && \text{(linearity)}\\
+                   & = \pi_2(h)(\int_G \langle \pi_1(g)v , v_1  \rangle \cdot \pi_2(g^{-1}) v_2 dg) && \text{(linearity)}\\
+                   & = \pi_2(h)(T(v))
+  \end{align*}
+\end{proof}
+
+\begin{thm}[Schur orthogonality, between representations] \label{schur-ortho-1}
+  Let $G$ be a compact group, $(\pi_1, V_1)$, $(\pi_2, V_2)$ be two irreducible
+  representations of $G$.  Then either $\mathcal{M}_{\pi_1} \perp
+  \mathcal{M}_{\pi_2}$ in $L^2(G)$ or the representations are isomorphic.
+\end{thm}
+
+\begin{proof}
+  We will prove the result by negating one of the conclusion and use it to prove
+  the other.  Suppose $\mathcal{M}_{\pi_1} \not\perp \mathcal{M}_{\pi_2}$, then
+  there exist matrix coefficients $f_1 \in \mathcal{M}_{\pi_1}$ and $f_2 \in
+  \mathcal{M}_{\pi_2}$ such that $\langle f_1 , f_2 \rangle \neq 0$.  By Riesz
+  representation theorem, we may characterize $f_1$ and $f_2$ by:
+  \[
+    f_1(g) = \langle \pi_1(g)w_1 , v_1 \rangle
+    \quad
+    f_2(g) = \langle \pi_2(g)w_2 , v_2 \rangle
+  \]
+  for some $w_i, v_i \in V_i$.  To avoid notational confusion, let
+  $H(\cdot,\cdot)$ denote the inner product of the Hilbert space, and let
+  $\langle \cdot, \cdot \rangle$ denote the inner product of both $V_1$ and
+  $V_2$. Then by our assumption,
+  \[
+    H(f_1, f_2) = \int_G \langle \pi_1(g)w_1, v_1 \rangle \cdot
+    \conj{\langle \pi_2(g)w_2, v_2 \rangle} dg \neq 0
+  \]
+  By complex conjugate, invariance and linearity,
+  \begin{align*}
+    & \int_G \langle \pi_1(g)w_1, v_1 \rangle \cdot \conj{\langle \pi_2(g)w_2, v_2 \rangle} dg\\
+    & = \int_G \langle \pi_1(g)w_1, v_1 \rangle \cdot \langle v_2, \pi_2(g)w_2 \rangle dg\\
+    & = \int_G \langle \pi_1(g)w_1, v_1 \rangle \cdot \langle \pi_2(g^{-1}) v_2, \pi_2(g^{-1}) \pi_2(g)w_2 \rangle dg\\
+    & = \int_G \langle \pi_1(g)w_1, v_1 \rangle \cdot \langle \pi_2(g^{-1}) v_2, w_2 \rangle dg\\
+    & = \int_G \langle \langle \pi_1(g)w_1, v_1 \rangle \cdot \pi_2(g^{-1}) v_2, w_2 \rangle dg\\
+    & = \left\langle \int_G \langle \pi_1(g)w_1, v_1 \rangle \cdot \pi_2(g^{-1}) v_2 dg, w_2 \right\rangle \neq 0
+  \end{align*}
+  Let $T : V_1 \to V_2$ be define as in \Cref{schur-con-inter-op} and plugging
+  the definition, we have,
+  \[
+    \langle T(w_1),w_2 \rangle \neq 0
+  \]
+  Hence $T : V_1 \to V_2$ is not zero, by Schur's Lemma (in compact case), $T$
+  is an isomorphism.
+\end{proof}
+
+\Cref{schur-ortho-1} shows that if we have two non-isomorphic irreducible
+representations of a compact group $G$, then any pair of matrix coefficients of
+each representation is orthogonal.  We now consider the orthogonality of matrix
+coefficients of the same irreducible representation, we will give an explicit
+formula for computing the inner product of matrix coefficients of the same
+irreducible representation.
+
+\begin{thm}[Schur's Orthogonality, in one representation] \label{schur-ortho-2}
+  Let $G$ be a compact group, $(\pi,V)$ be an irreducible representation of $G$.
+  $V$ is equipped with inner product $\langle \cdot,\cdot \rangle$.
+  Then fixing $v_1,v_2,w_1,w_2 \in V$, there exist a constant $d > 0$ such that
+  \[
+    \int_G \langle \pi(g)w_1, v_1 \rangle \cdot \conj{\langle \pi(g)w_2, v_2 \rangle} dg
+    = d^{-1} \langle w_1, w_2 \rangle \cdot \langle v_2, v_1 \rangle
+  \]
+\end{thm}
+
+\begin{proof}
+  Firstly, let $v_1, v_2$ be fixed.  Let $T : V \to V$ be defined similar to
+  \Cref{schur-con-inter-op} by:
+  \[
+    T(w) = \int_G \langle \pi(g)w, v_1 \rangle \pi(g^{-1})v_2 dg
+  \]
+  Then, by Schur's Lemma, $T = \lambda I$ for some constant $\lambda$ (depending
+  on $v_1$ and $v_2$), and
+  \begin{align*}
+      & \int_G \langle \pi(g)w_1, v_1 \rangle \cdot \conj{\langle \pi(g)w_2, v_2 \rangle} dg\\
+    = & \int_G \langle \pi(g)w_1, v_1 \rangle \cdot \langle v_2, \pi(g)w_2\rangle dg\\
+    = & \int_G \langle \pi(g)w_1, v_1 \rangle \cdot \langle \pi(g^{-1})v_2, w_2\rangle dg\\
+    = & \left\langle \int_G \langle \pi(g)w_1, v_1 \rangle \cdot \pi(g^{-1})v_2 dg , w_2 \right\rangle\\
+    = & \langle T(w_1, w_2) \rangle = \lambda \langle w_1,w_2 \rangle
+  \end{align*}
+  Now, let $w_1, w_2$ be fixed. Let $\widetilde{T} : V \to V$ be defined by
+  \[
+    \widetilde{T}(v) = \int_G \langle \pi(g)v, w_2 \rangle \cdot \pi(g^{-1})w_1 dg
+  \]
+  Then, $\widetilde{T} = \widetilde{\lambda} I$, and
+  \begin{align*}
+      & \int_G \langle \pi(g)w_1, v_1 \rangle \cdot \conj{\langle \pi(g)w_2, v_2 \rangle} dg\\
+    = & \int_G \langle \pi(g)w_1, v_1 \rangle \cdot \langle v_2, \pi(g)w_2 \rangle dg\\
+    = & \int_G \langle \pi(g)w_1, v_1 \rangle \cdot \langle \pi(g^{-1})v_2, w_2 \rangle dg
+  \end{align*}
+  Substitute $g$ by $g^{-1}$, since Haar measures on compact groups are unique
+  upto a constant multiple, let $c$ be the constant, then $d(g^{-1}) = cdg$,
+  hence
+  \begin{align*}
+    \ldots = & c \int_G \langle \pi(g^{-1})w_1, v_1 \rangle \cdot \langle \pi(g)v_2, w_2 \rangle dg\\
+    = & c \int_G \langle \langle \pi(g)v_2 w_2 \rangle \pi(g^{-1})w_1 , v_1 \rangle dg\\
+    = & c \langle \int_G \langle \pi(g)v_2 w_2 \rangle \pi(g^{-1})w_1 dg , v_1 \rangle\\
+    = & c \langle \widetilde{T}(v_2), v_1 \rangle = c \widetilde{\lambda} \langle v_2, v_1 \rangle
+  \end{align*}
+  Combining the two results above, there exist a constant $d$ such that
+  \[
+    \int_G \langle \pi(g)w_1, v_1 \rangle \cdot \conj{\langle \pi(g)w_2, v_2 \rangle} dg
+    = d^{-1} \langle w_1, w_2 \rangle \cdot \langle v_2, v_1 \rangle
+  \]
+  If we let $w_1 = w_2$, $v_1 = v_2$, then the left hand side is positive the
+  definition of inner product on the Hilbert space, then $d$ must be positive.
+\end{proof}
+
+
+
+% \subsection{Representation of Compact Groups}
+
+% \begin{lem}[Complete reducibility]
+%   If $G$ is compact, then each finite dimensional representation is the direct
+%   sum of irreducible representations.
+% \end{lem}
+
+% \begin{proof}
+  
+% \end{proof}
+
+% \begin{thm}[Schur orthogonality]
+%   Suppose $(\pi_1, V_1)$ and $(\pi_2, V_2)$ are irreducible representations of a
+%   compact group $G$. Either every matrix coefficient of $\pi_1$ is orthogonal in
+%   $L^2(G)$ to every matrix coefficient coefficient of $\pi_2$, or the
+%   representations are isomorphic.
+% \end{thm}
+
+% \begin{proof}
+% \end{proof}
+
+% \begin{defn}[Character, for compact group]
+
+% \end{defn}
+
+
+\subsection{Peter-Weyl's Theorem}
+
+The goal of the this main section is to prove an arbitrary representation of a
+compact group can be reduced into a direct sum of \emph{finite dimensional}
+irreducible representations.  In particular, if we have the reducibility, by
+\Cref{schur-ortho-1} and \Cref{schur-ortho-2}, we can show the components are
+pairwise orthogonal.
+
+The main technique used in the proofs follows from the idea of using matrix
+coefficients to construct suitable finite dimensional subrepresentations of the
+given representation.  Thus, what lies in the heart of Peter-Weyl's Theorem is
+the observation that there exist an ``adequate'' supply of matrix coefficients
+on the given group $G$.  Hence, we sometimes refer to this result
+(\Cref{peter-weyl-1}) as the Peter-Weyl's Theorem.
+
+
+Throughout the discussion of Peter-Weyl's Theorem, we will be mainly interested
+in normed vector space of continuous functions on $G$, or space of $L^p$
+functions on $G$, where the $p$-norm is defined as, for $1 \leq p < \infty$
+\[
+  \norm{f}_p \triangleq \left\{ \int_G \abs{f(g)}^{p}   \right\}^{1/p}
+\]
+when $p = \infty$, we define the sup-norm by
+\[
+  \norm{f}_{\infty} \triangleq \esssup_G f = \inf \SetForm{a \in \R}{\mu\SetForm{g \in G}{f(x) > a} = 0}
+  = \sup_{G} \abs{f(x)} \quad \text{if } f \in C(G)
+\]
+We define $L^p(G)$ to be the set containing all functions $f$ on $G$ such that
+$\norm{f}_p < \infty$.
+
+Let $C(G)$ denote the collection of continuous functions on compact group $G$,
+then $C(G)$ forms a ring with multiplication being \emph{convolution}:
+\[
+  (f_1 \star f_2)(g) = \int_G f_1(gh^{-1}) f_2(h) dh = \int_G f_1(h) f_2(h^{-1}g) dh
+\]
+
+Given $\phi \in C(G)$, let $T_{\phi} : C(G) \to C(G)$ be the linear operator by
+left convolution: $T_{\phi} : f \mapsto \phi \star f$.
+
+\begin{prop} \label{1-2-infty}
+  Let $f \in C(G)$ be given, then
+  \[
+    \norm{f}_1 \leq \norm{f}_2 \leq \norm{f}_{\infty}
+  \]
+\end{prop}
+
+\begin{proof}
+  By Cauchy-Schwarz inequality, let $\langle \cdot , \cdot \rangle$ be the inner
+  product defined as \Cref{Hilbert-inner-product}, let $1$ denote the constant
+  function $1$,
+  \[
+    \norm{f}_1 = \langle \abs{f} , 1 \rangle
+    \leq \left(\langle \abs{f}, \abs{f} \rangle \right)^{1/2} \cdot \left( \langle 1, 1 \rangle \right)^{1/2}
+    = \left( \int_G \abs{f(g)}^2 dg \right)^{1/2} = \norm{f}_2
+  \]
+  The second inequality is trivial,
+  \[
+    \norm{f}_2
+    = \left( \int_G \abs{f(g)}^2 dg \right)^{1/2}
+    \leq \left( \int_G \norm{f}_{\infty}^{2} dg \right)^{1/2}
+    = \norm{f}_{\infty}
+  \]
+\end{proof}
+
+\begin{prop} \label{Tphi-bounded}
+  Let $G$ be a compact group, $\phi \in C(G)$.  Then $T_{\phi}$ is a bounded
+  operator on $L^1(G)$. Further, if $f \in L^1(G)$, then $T_{\phi}f \in
+  L^{\infty}(G)$ and
+  \[
+    \norm{T_{\phi}f}_{\infty} \leq \norm{\phi}_{\infty} \norm{f}_1
+  \]
+\end{prop}
+
+\begin{proof}
+  Let $f \in L^1(G)$ be given. We estimate the sup-norm of $T_{\phi}f$ by
+  \[
+    \norm{T_{\phi} f}_{\infty}
+    = \sup_{g \in G} \abs{\int_G \phi(g h^{-1}) f(h) dh}
+    \leq \norm{\phi}_{\infty} \int_G \abs{f(h)} dh
+  \]
+  Put $C \triangleq \norm{\phi}_{\infty}$, $C < \infty$ since $\phi$ is a
+  continuous function on a compact set hence obtain a finite extrema.  Since $f
+  \in L^1(G)$, $\norm{f}_1 < \infty$, thus $T_{\phi}f \in L^{\infty}(G)$.
+  
+  Furthermore by \Cref{1-2-infty}, $\norm{T_{\phi} f}_1 \leq \norm{T_{\phi} f}_2
+  \leq \norm{T_{\phi} f}_{\infty}$,  We have, $\norm{T_{\phi}f}_1 \leq C
+  \norm{f}_1$, thus by definition the operator $T_{\phi}$ is bounded in
+  $L^1(G)$. In fact, $T_{\phi}$ is bounded in all three norms: $1,2,\infty$.
+\end{proof}
+
+\begin{prop}\label{self-adjoint-compact}
+  Let $G$ be a compact group, $\phi \in C(G)$, then
+  \begin{enumerate}
+    \item $T_{\phi}$ is a bounded operator on $L^2(G)$ and $\abs{T_{\phi}} \leq \supnorm{\phi}$.
+    \item $T_{\phi}$ is compact.
+    \item If $\phi(g^{-1}) = \conj{\phi(g)}$, it is self-adjoint.
+  \end{enumerate}
+\end{prop}
+
+\begin{proof}
+  \begin{enumerate}
+    \item Let $f \in L^2(G)$ be given, then $f \in L^1(G)$ by \Cref{1-2-infty}
+      and by the argument in \Cref{Tphi-bounded},
+      \[
+        \norm{T_{\phi} f}_{2} \leq
+        \supnorm{T_{\phi} f} \leq
+        \supnorm{\phi} \norm{f}_1 \leq \supnorm{\phi} \norm{f}_2
+      \]
+      Hence $T_{\phi}$ is bounded on $L^2(G)$ and $\abs{T_{\phi}} \leq \supnorm{\phi}$.
+
+    \item 
+      Let $B$ be a set of bounded functions in $L^2(G)$, without loss of
+      generality, we consider the unit ball in $L^2(G)$. Since $L^2(G) \subset
+      L^1(G)$, it suffices to consider the unit ball in $L^1(G)$ , that is:
+      \[
+        B \triangleq \SetForm{f \in L^1(G)}{\norm{f}_1 \leq 1}
+      \]
+      We want to show the image set $T_{\phi}(B)$ is sequentially compact, that
+      is, every infinite sequence in $T_{\phi}(B)$ has a convergent subsequence.
+      We will establish the result by using Ascoli and Arzela
+      \Cref{ascoli-arzela}.  First off, by \Cref{Tphi-bounded}, we know
+      $T_{\phi}(B)$ is bounded, hence it suffice to show $T_{\phi}(B)$ is
+      equicontinuous.
+
+      Let $\epsilon > 0$ be given, since $\phi \in C(G)$ and $G$ is compact,
+      $\phi$ is uniformly continuous, there exist a neighborhood $N$ of the
+      identity $1_G \in G$ such that
+      \[
+        \abs{\phi(kg) - \phi(g)} < \epsilon \qquad (\forall k \in N)
+      \]
+      Then given $f \in B$, $k \in N$, $g \in G$,
+      \begin{align*}
+        \abs{T_{\phi}f(kg) - T_{\phi}f(g)}
+        & = \abs{\int_G (\phi(kgh^{-1}) - \phi(gh^{-1})) f(h) dh}\\
+        & \leq \int_G \abs{\phi(kgh^{-1}) - \phi(gh^{-1})} \cdot \abs{f(h)} dh\\
+        & \leq \epsilon \norm{f}_1 \leq \epsilon
+      \end{align*}
+      By definition, $T_{\phi}(B)$ is equicontinuous, hence apply
+      \Cref{ascoli-arzela}, $T_{\phi}(B)$ is sequentially compact, $T_{\phi}$ is
+      compact.
+
+    \item Suppose we have $\phi(g^{-1}) = \conj{\phi(g)}$, then
+      \begin{align*}
+        \langle T_{\phi}f_1, f_2 \rangle
+        & = \int_G T_{\phi}f_1(g) \cdot \conj{f_2(g)} dg\\
+        & = \int_G (\int_G \phi(gh^{-1}) f_1(h) dh) \cdot \conj{f_2(g)} dg\\
+        & = \int_G (\int_G \conj{\phi(hg^{-1})} f_1(h) dh) \cdot \conj{f_2(g)} dg\\
+        & = \int_G f_1(h) \cdot \conj{T_{\phi}f_2(h)} dh\\
+        & = \langle f_1, T_{\phi}f_2 \rangle
+      \end{align*}
+      Hence $T_{\phi}$ is self-adjoint.
+  \end{enumerate}
+\end{proof}
+
+\begin{prop} \label{Tphi-invariant}
+  Let $G$ be a compact group, $\phi \in C(G)$, $\lambda \in \C$, then the
+  $\lambda$-eigenspace
+  \[
+    V(\lambda) = \SetForm{f \in L^2(G)}{T_{\phi}f = \lambda f}
+  \]
+  is invariant under $\rho(g)$ for all $g \in G$, where $\rho(g)$ is defined as
+  usual as in \Cref{eq:LR-translation}.
+\end{prop}
+
+\begin{proof}
+  Let $g \in G$ be given,
+  \begin{align*}
+    (T_{\phi}(\rho(g)f))(x)
+    & = \int_G \phi(xh^{-1}) f(hg) dh\\
+    & = \int_G \phi(xgh^{-1}) f(h) dh && \text{substitute } h \to hg^{-1}\\
+    & = (\rho(g)(T_{\phi}f))(x)
+  \end{align*}
+\end{proof}
+
+\begin{thm}[Peter-Weyl, Part 1] \label{peter-weyl-1}
+  The matrix coefficients of $G$ are dense in $L^2(G)$.
+\end{thm}
+
+\begin{proof}
+  Let $f \in L^2(G)$ be given, we need to show for any $\epsilon > 0$, there
+  exist a matrix coefficient $f'$ (thus associated with a finite dimensional
+  representation), such that $\norm{f' - f} < \epsilon$.
+
+  Let $\epsilon > 0$ be given, since $G$ is compact, $f$ is uniformly continuous
+  on $G$, hence left translation of $f$ by $g$: $\lambda(g)f = h \mapsto
+  f(g^{-1}h)$ is uniformly continuous on $G$. Then there exist a neighborhood $U
+  \ni 1_G$ such that $\norm{\lambda(g)f - \lambda(1_G)f}_{\infty} =
+  \norm{\lambda(g)f - f}_{\infty} < \epsilon/2$ for all $g \in U$.
+
+  Define $\phi : U \to \C$ be a continuous map satisfying $\int_G \phi(g) dg = \int_U
+  \phi(g) dg = 1$, and $\phi(g) = \phi(g^{-1})$.  Then the operator $T_{\phi}$
+  is self-adjoint and compact by \Cref{self-adjoint-compact}. We collect the
+  following facts:
+  \begin{enumerate}
+    \item $\norm{T_{\phi}f - f} < \epsilon/2$:
+      \begin{align*}
+        \abs{T_{\phi}f(h) - f(h)}
+        & = \abs{\int_G \phi(g) f(g^{-1}h) - \phi(g)f(h) dg}\\
+        & = \abs{\int_U \phi(g) f(g^{-1}h) - \phi(g)f(h) dg}\\
+        & \leq \int_U \phi(g) \cdot \abs{f(g^{-1}h) - f(h)} dg\\
+        & \leq \int_U \phi(g) \cdot \norm{\lambda(g)f - f}_{\infty} dg
+          \leq \frac{\epsilon}{2}
+      \end{align*}
+
+    \item $T_{\phi}$ is a compact operator on $L^2(G)$ by \Cref{self-adjoint-compact}.
+
+    \item 
+      Let $\lambda$ denote an eigenvalue of $T_{\phi}$, by spectral theorem
+      \Cref{spectral}, the eigenspaces $V(\lambda) \subset L^2(G)$ are all
+      finite dimensional except perhaps $V(0)$.  Furthermore, the spectral
+      theorem tells us spaces $V(\lambda)$ are mutually orthogonal and they span
+      $L^2(G)$.
+
+    \item 
+      By \Cref{Tphi-invariant}, maps in $V(\lambda)$ are all $T_{\phi}$
+      invariant.
+  \end{enumerate}
+
+  Let $f_\lambda$ be the projection of $f$ on the basis $V(\lambda)$:
+  \[
+    f_{\lambda} = \sum_{w \in V(\lambda)} \langle f, w \rangle w
+  \]
+  By orthogonality between $V(\lambda)$s, we have
+  \[
+    \sum_{\lambda} \norm{f_{\lambda}}_2^2 = \norm{f}_2^2 < \infty
+  \]
+  For some positive real number $q$, define $f', f''$ by:
+  \[
+    f'' \triangleq \sum_{\abs{\lambda} > q} f_{\lambda},
+    \qquad
+    f' \triangleq T_{\phi}f''
+  \]
+  Then both $f'$ and $f''$ are contained in a finite dimensional vector space:
+  $\bigoplus_{\abs{\lambda} > q} V(\lambda)$.  By (4), and apply
+  \Cref{left-right-finite}, it follows $f$ is a matrix coefficient of a finite
+  dimensional representation.
+
+  Lastly, we will show $f'$ indeed approximates $f$ within $\epsilon$: choose
+  $q$ so that
+  \[
+    \norm{\sum_{0 < \abs{\lambda} < q} f_{\lambda}}_1
+    \leq \norm{\sum_{0 < \abs{\lambda} < q} f_{\lambda}}_2
+    = \sqrt{\sum_{0 < \abs{\lambda} < q} \norm{f_{\lambda}}_2^2}
+    < \frac{\epsilon}{2\supnorm{\phi}}
+  \]
+  Then,
+  \begin{align*}
+    \supnorm{T_{\phi}(f - f'')}
+    & = \supnorm{T_{\phi} \left( f_0 + \sum_{0 < \abs{\lambda} < q} f_{\lambda} \right)}
+    = \supnorm{T_{\phi} \left( \sum_{0 < \abs{\lambda} < q} f_{\lambda} \right)}\\
+    & \leq \supnorm{\phi} \cdot \norm{\sum_{0 < \abs{\lambda} < q} f_{\lambda}}_1
+    < \frac{\epsilon}{2}
+  \end{align*}
+  Therefore, use $T_{\phi}$ invariance,
+  \[
+    \supnorm{f - f'}
+    = \supnorm{f + T_{\phi}(f - f - f'')}
+    = \supnorm{f - T_{\phi}f} + \supnorm{T_{\phi}f - T_{\phi}f''}
+    < \frac{\epsilon}{2} + \frac{\epsilon}{2} = \epsilon
+  \]
+\end{proof}
+
+\begin{cor}
+  The matrix coefficients of compact group $G$ are dense in $L^2(G)$.
+\end{cor}
+
+\begin{proof}
+  Since $C(G)$ is dense in $L^2(G)$, it follows from \Cref{peter-weyl-1}.
+\end{proof}
+
+% \begin{thm}
+% \end{thm}
+
+% \begin{proof}
+% \end{proof}
+
+\begin{thm}[Peter-Weyl, Part 2] \label{peter-weyl-2}
+  Let $H$ be a Hilbert space and $G$ be a compact group. Let $\pi : G \to
+  End(H)$ be a unitary representation. Then $H$ is a direct sum of
+  finite dimensional irreducible representations.
+  % The space of square integrable functions on $G$ is the Hilbert space direct
+  % sum over finite dimensional irreducible representations $V$,
+  % \[
+  %   \ell^2(G) \cong \hat{\bigoplus} End(V)
+  % \]
+\end{thm}
+
+\begin{proof}
+  We will prove firstly, if $H$ is nonzero then it has an irreducible finite
+  dimensional invariant subspace. Then, we will extract a finite dimensional
+  representation of $G$ on $H$.
+
+  Let $v \in H$ be a nonzero vector, since the group action $\pi$ is continuous
+  and $G$ is compact, it's uniformly continuous in $G$. Hence there exist a
+  neighborhood $N$ of $1_G \in G$ such that
+  \[
+    \norm{\pi(g)v - \pi(1_G)v} = \norm{\pi(g)v - v} \leq \frac{\norm{v}}{2} \qquad (\forall g \in N)
+  \]
+  Define $\phi : N \to \C$ be a continuous map satisfying $\int_G \phi(g) dg =
+  1$. Then
+  \[
+    \left\langle \int_G \phi(g) \cdot \pi(g)v dg , v \right\rangle
+    = \langle v, v \rangle - \left\langle \int_N \phi(g) \cdot (v - \pi(g)v) dg, v \right\rangle
+  \]
+  and by Cauchy Schwarz,
+  \begin{align*}
+    & \norm{ \left\langle \int_N \phi(g) \cdot (v - \pi(g)v) dg, v  \right\rangle }\\
+    & \leq \norm{\int_N \phi(g) \cdot (v - \pi(g)v) dg} \cdot \norm{v}\\
+    & \leq \int_N \norm{\phi(g)} \norm{v - \pi(g)v} dg \cdot \norm{v}\\
+    & \leq \int_N \norm{\phi(g)} \cdot \frac{\norm{v}}{2} dg \cdot \norm{v}
+      = \frac{\norm{v}^2}{2}
+  \end{align*}
+  Hence, the integral $\int_G \phi(g) \cdot \pi(g)v dg \neq 0$.
+
+  By \Cref{peter-weyl-1}, since $\phi \in C(G)$, for arbitrary $\epsilon > 0$,
+  there exist a matrix coefficient $f$ associated to a finite dimensional
+  representation $(\rho, W)$ such that $\supnorm{f - \phi} < \epsilon$. Thus, in
+  this case,
+  \[
+    \norm{\int_G (f - \phi)(g) \cdot \pi(g)v dg} \leq \epsilon \norm{v}
+  \]
+  Take small enough $\epsilon$, then $\norm{\int_G f(g) \cdot \pi(g)v dg} =
+  \norm{\int_G \phi(g) \cdot \pi(g)v dg} + \epsilon \norm{v} \neq 0$.
+
+  By \Cref{dual-mat-coeff}, $\check{f}$ is a matrix coefficient of the dual
+  representation $(\hat{\rho}, W^*)$ (which has the same dimension). By
+  definition of matrix coefficient, $\check{f}(g) = L(\hat{\rho}(g)w)$ for some $L \in
+  (W^* \to \C) \simeq W$, $w \in W^*$. Define $T : W^* \to H$ by
+  \[
+    T(x) \triangleq \int_G L(\hat{\rho}(g^{-1})x) \cdot \pi(g)v dg
+  \]
+  using the same argument used to prove \Cref{schur-con-inter-op}, we know $T
+  \in \Hom^G(W^*, H)$ and it's nonzero since when evaluated at $w$:
+  \[
+    T(w) = \int_G L(\hat{\rho}(g^{-1})w) \cdot \pi(g)v dg
+    = \int_G \check{f}(g^{-1}) \cdot \pi(g)v dg
+    = \int_G f(g) \cdot \pi(g)v dg \neq 0
+  \]
+  Since $\dim(W^*) < \infty$, the image $T(W^*)$ is a nonzero finite dimensional
+  invariant subspace of $H$!
+
+  Now, let $\Sigma$ be the set of all sets of finite dimensional irreducible
+  invariant subspaces, order its elements by inclusion.  By Zorn's Lemma, the
+  partial order $\Sigma$ has a maximal element $\widetilde{S}$.  If
+  $\widetilde{S}$ spans $H$, we are done with $\widetilde{S}$ being a complete
+  decomposition of $H$.  Otherwise, the complement of the span of $S$ is a
+  nonzero, by previous arguments, it contains an invariant irreducible subspace
+  $U$, then $\widetilde{S}$ is not maximal since $\widetilde{S} \cup \{U\}$ is
+  larger than $\widetilde{S}$, we have a contradiction!
+\end{proof}
+
+We have shown that a Hilbert space representation of a compact group may be
+completely reduced into a direct sum of \emph{finite dimensional} irreducible
+representations.  If we instantiate the result with $G = \T$, $H = L^2(\R)$ and
+an action $\widetilde{\pi} : \T \times L^2(\R) \to L^2(\R)$
+\[
+  \widetilde{\pi}(e^{i\theta})f \triangleq e^{i\theta} \cdot \hat{f}
+\]
+where $\hat{f}$ is the complete decomposition of $f$ into orthogonal components
+given by Peter-Weyl's Theorem (which is exactly the Fourier transform of $f$).
+If we chain $\widetilde{\pi}$ together with the quotient map $\R \to \R/\Z
+\simeq \T$ that sends $t \in \R$ to $e^{it} \in \T$, then we recover the map
+$\pi : \R \times L^2(\R) \to L^2(\R)$ from the introduction.
